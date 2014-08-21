@@ -1,0 +1,15 @@
+{
+  "name":     "jdi/demo-corp",
+  "homepage": "http://demo-corp.biz",
+  "license":  "BSD-3-Clause",
+  "require":  {
+    "cubex/framework":   "*",
+    "packaged/dispatch": "*",
+    "stack/builder":     "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "DemoCorp\\": "src/"
+    }
+  }
+}
