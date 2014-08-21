@@ -3,8 +3,9 @@
   "homepage": "http://demo-corp.biz",
   "license":  "BSD-3-Clause",
   "require":  {
-    "cubex/framework":   "*",
+    "cubex/framework":   "dev-master",
     "packaged/dispatch": "*",
+    "jdi/tntaffiliate":  "dev-master",
     "stack/builder":     "*"
   },
   "autoload": {
