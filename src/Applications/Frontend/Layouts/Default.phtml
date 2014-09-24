@@ -1,4 +1,7 @@
 <?php
+/**
+ * @var $this \Cubex\View\Layout
+ */
 $am = \Packaged\Dispatch\AssetManager::assetType();
 $am->requireCss(
   [
@@ -96,7 +99,11 @@ $am->requireJs(
     <div class="row">
       <div class="col-lg-12 text-center">
         <p>Copyright &copy; Demo Corp 2014 | <a
-            href="http://affiliates.demo-corp.biz">Affiliates</a></p>
+            href="<?=
+            $this->getData(
+              "tnt.login",
+              'http://affiliates.demo-corp.biz'
+            ); ?>">Affiliates</a></p>
       </div>
     </div>
   </div>
@@ -110,7 +117,11 @@ $am->requireJs(
     }
   )
 </script>
-<script src="https://demo-track.tntaffiliate.com/js/fprint/tntprint.js"
+<script src="<?=
+$this->getData(
+  "tnt.pixel",
+  'https://demo-track.tntaffiliate.com/js/fprint/tntprint.js'
+); ?>"
         type="text/javascript"></script>
 </body>
 

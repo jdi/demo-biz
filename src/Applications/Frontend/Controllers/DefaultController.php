@@ -1,10 +1,9 @@
 <?php
 namespace DemoCorp\Applications\Frontend\Controllers;
 
-use Cubex\View\LayoutController;
 use DemoCorp\Applications\Frontend\Views\AssetTemplatedView;
 
-class DefaultController extends LayoutController
+class DefaultController extends BaseController
 {
   public function about()
   {
