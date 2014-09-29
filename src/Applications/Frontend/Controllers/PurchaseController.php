@@ -22,6 +22,7 @@ class PurchaseController extends BaseController
     $options->pixels         = true;
     $options->data           = $this->_getRequest()->request->all();
     $options->eventReference = $this->_getRequest()->request->get('event_ref');
+    $options->coupon         = $this->_getRequest()->request->get('coupon');
     if(empty($options->eventReference))
     {
       $options->eventReference = Strings::randomString(6);
