@@ -1,0 +1,57 @@
+<div class="row">
+  <div class="box">
+    <div class="col-lg-12">
+      <hr>
+      <h2 class="intro-text text-center">Refund a Demo Corp Product</h2>
+      <hr>
+      <p>Please fill out the form below to purchase</p>
+
+      <form method="post" action="/refund" class="panel form-horizontal">
+        <div class="panel-body">
+          <div class="form-group">
+            <label for="inputEventRef"
+                   class="col-sm-2 control-label">Event Reference</label>
+
+            <div class="col-sm-10">
+              <input name="event_ref" type="text" class="form-control"
+                     id="inputEventRef"
+                     placeholder="Order ID to refund">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="inputType"
+                   class="col-sm-2 control-label">Type</label>
+
+            <div class="col-sm-10">
+              <select id="inputType" name="type" class="form-control">
+                <option value="join">Join</option>
+                <option value="sale">Sale</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="asdasdas"
+                   class="col-sm-2 control-label">Reason</label>
+
+            <div class="col-sm-10">
+              <textarea name="reason" class="form-control"></textarea>
+            </div>
+          </div>
+
+          <!-- / .form-group -->
+          <div class="form-group" style="margin-bottom: 0;">
+            <div class="col-sm-offset-2 col-sm-10">
+              <button type="submit" class="btn btn-primary">Refund Order
+              </button>
+            </div>
+          </div>
+          <!-- / .form-group -->
+        </div>
+      </form>
+
+    </div>
+  </div>
+</div>
+
