@@ -1,12 +1,12 @@
 {
-  "name":     "jdi/demo-corp",
+  "name": "jdi/demo-corp",
   "homepage": "http://demo-corp.biz",
-  "license":  "BSD-3-Clause",
-  "require":  {
-    "cubex/framework":   "dev-master",
-    "packaged/dispatch": "*",
-    "jdi/tntaffiliate":  "dev-master",
-    "stack/builder":     "*"
+  "license": "BSD-3-Clause",
+  "require": {
+    "cubex/framework": "dev-master",
+    "packaged/dispatch": "~0.0",
+    "jdi/tntaffiliate": "dev-master",
+    "stack/builder": "~1.0"
   },
   "autoload": {
     "psr-4": {

@@ -4,6 +4,9 @@ runtime: php
 api_version: 1
 threadsafe: yes
 
+env_variables:
+  CUBEX_ENV: 'production'
+
 handlers:
 - url: .*
   script: public/index.php
