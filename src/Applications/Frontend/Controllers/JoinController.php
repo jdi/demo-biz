@@ -2,9 +2,6 @@
 namespace DemoCorp\Applications\Frontend\Controllers;
 
 use DemoCorp\Applications\Frontend\Views\AssetTemplatedView;
-use JDI\TntAffiliate\Models\ActionOptions;
-use JDI\TntAffiliate\TntAffiliate;
-use JDI\TntAffiliate\TntAffiliateApi;
 use Packaged\Helpers\Strings;
 
 class JoinController extends BaseController
@@ -24,35 +21,10 @@ class JoinController extends BaseController
       $eventRef
     );
 
-    //Trigger Join
-    $config = $this->getCubex()->getConfiguration()->getSection('tntaffiliate');
-    $api = new TntAffiliateApi($config->getItem('endpoint'));
-    $api->login(
-      $config->getItem('client_id'),
-      $config->getItem('client_secret')
-    );
-    $options = new ActionOptions();
-    $options->pixels = true;
-    $options->data = $reqData;
-    $options->eventReference = $eventRef;
-    $resp = $api->triggerAction(
-      'lead',
-      TntAffiliate::getVisitorId(),
-      $options
-    );
-
     echo '<div class="row"><div class="box"><div class="col-lg-12">';
-
-    echo '<h3>' . $resp->getActionId() . '</h3>';
 
     echo '<h4>Fortifi Pixels</h4>';
     foreach($this->_getFortifi()->visitor()->getPixels() as $pixel)
-    {
-      echo '<textarea cols="100" rows="6">' . esc($pixel) . '</textarea><br/>';
-    }
-
-    echo '<h4>TNT Pixels</h4>';
-    foreach($resp->getPixels() as $pixel)
     {
       echo '<textarea cols="100" rows="6">' . esc($pixel) . '</textarea><br/>';
     }
