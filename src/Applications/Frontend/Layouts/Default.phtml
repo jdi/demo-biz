@@ -120,11 +120,9 @@ $am->requireJs(
     }
   )
 </script>
-<script src="<?=
-$this->getData(
-  "tnt.pixel",
-  'https://demo-track.tntaffiliate.com/js/fprint/tntprint.js'
-); ?>"
+<script src="<?= $this->getData("tnt.pixel"); ?>"
+        type="text/javascript"></script>
+<script src="<?= $this->getData("fortifi.pixel"); ?>"
         type="text/javascript"></script>
 </body>
 

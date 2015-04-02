@@ -3,9 +3,11 @@
   "homepage": "http://demo-corp.biz",
   "license": "BSD-3-Clause",
   "require": {
-    "cubex/framework": "dev-master",
-    "packaged/dispatch": "~0.0",
+    "cubex/framework": "~2",
+    "packaged/dispatch": "~0",
     "jdi/tntaffiliate": "dev-master",
+    "fortifi/sdk": "dev-master",
+    "fortifi/fortifi-api": "dev-master",
     "stack/builder": "~1.0"
   },
   "autoload": {

@@ -11,21 +11,30 @@ class JoinController extends BaseController
 {
   public function postDefaultAction()
   {
+    $reqData = $this->_getRequest()->request->all();
+    $eventRef = idx($reqData, 'event_ref', Strings::randomString(10));
+
+    //Trigger Fortifi Join
+    $this->_getFortifi()->customer()->create(
+      'FID:COMP:1427969151:fa2875781cd3',
+      idx($reqData, 'email'),
+      idx($reqData, 'first_name'),
+      null,
+      null,
+      $eventRef
+    );
+
     //Trigger Join
     $config = $this->getCubex()->getConfiguration()->getSection('tntaffiliate');
-    $api    = new TntAffiliateApi($config->getItem('endpoint'));
+    $api = new TntAffiliateApi($config->getItem('endpoint'));
     $api->login(
       $config->getItem('client_id'),
       $config->getItem('client_secret')
     );
-    $options                 = new ActionOptions();
-    $options->pixels         = true;
-    $options->data           = $this->_getRequest()->request->all();
-    $options->eventReference = $this->_getRequest()->request->get('event_ref');
-    if(empty($options->eventReference))
-    {
-      $options->eventReference = Strings::randomString(10);
-    }
+    $options = new ActionOptions();
+    $options->pixels = true;
+    $options->data = $reqData;
+    $options->eventReference = $eventRef;
     $resp = $api->triggerAction(
       'lead',
       TntAffiliate::getVisitorId(),
@@ -36,6 +45,13 @@ class JoinController extends BaseController
 
     echo '<h3>' . $resp->getActionId() . '</h3>';
 
+    echo '<h4>Fortifi Pixels</h4>';
+    foreach($this->_getFortifi()->visitor()->getPixels() as $pixel)
+    {
+      echo '<textarea cols="100" rows="6">' . esc($pixel) . '</textarea><br/>';
+    }
+
+    echo '<h4>TNT Pixels</h4>';
     foreach($resp->getPixels() as $pixel)
     {
       echo '<textarea cols="100" rows="6">' . esc($pixel) . '</textarea><br/>';
