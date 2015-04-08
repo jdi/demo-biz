@@ -13,7 +13,7 @@ class JoinController extends BaseController
 
     //Trigger Fortifi Join
     $this->_getFortifi()->customer()->create(
-      'FID:COMP:1427969151:fa2875781cd3',
+      'FID:COMP:1428505525:07fd5b21c813',
       idx($reqData, 'email'),
       idx($reqData, 'first_name'),
       null,
