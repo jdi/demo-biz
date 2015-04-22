@@ -13,7 +13,7 @@ class PurchaseController extends BaseController
 
     //Trigger Fortifi Join
     $this->_getFortifi()->customer()->purchase(
-      'FID:COMP:1428505525:07fd5b21c813',
+      'FID:COMP:1429731764:3d9f2a4ed06c',
       $eventRef,
       idx($reqData, 'amount'),
       $reqData
