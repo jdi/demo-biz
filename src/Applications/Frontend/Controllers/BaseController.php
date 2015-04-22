@@ -14,6 +14,8 @@ class BaseController extends LayoutController
     {
       $cfg = $this->getCubex()->getConfiguration()->getSection('fortifi');
 
+      Fortifi::$apiHost = 'sapi.fortifi.co'; //This line is for sandbox accounts only
+
       $this->_fortifi = Fortifi::getInstance(
         $cfg->getItem('org'),
         $cfg->getItem('api_user'),
