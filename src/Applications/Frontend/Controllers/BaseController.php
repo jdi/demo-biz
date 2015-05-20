@@ -28,16 +28,8 @@ class BaseController extends LayoutController
   protected function _init()
   {
     $this->layout()->setData(
-      'tnt.pixel',
-      $this->getConfigItem('tntaffiliate', 'pixel')
-    );
-    $this->layout()->setData(
-      'fortifi.pixel',
-      $this->getConfigItem('fortifi', 'pixel')
-    );
-    $this->layout()->setData(
-      'tnt.login',
-      $this->getConfigItem('tntaffiliate', 'login')
+      'fortifi.track.domain',
+      $this->getConfigItem('fortifi', 'track')
     );
   }
 }
