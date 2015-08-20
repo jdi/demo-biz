@@ -4,11 +4,9 @@
   "license": "BSD-3-Clause",
   "require": {
     "cubex/framework": "~2",
-    "packaged/dispatch": "~0",
-    "jdi/tntaffiliate": "dev-master",
-    "fortifi/sdk": "dev-master",
-    "fortifi/fortifi-api": "dev-master",
-    "stack/builder": "~1.0"
+    "fortifi/sdk": "~1",
+    "packaged/dispatch": "~1",
+    "stack/builder": "~1"
   },
   "autoload": {
     "psr-4": {
