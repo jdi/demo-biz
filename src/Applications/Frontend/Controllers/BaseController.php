@@ -31,5 +31,9 @@ class BaseController extends LayoutController
       'fortifi.track.domain',
       $this->getConfigItem('fortifi', 'track')
     );
+    $this->layout()->setData(
+      'fortifi.chat.domain',
+      $this->getConfigItem('fortifi', 'chat')
+    );
   }
 }
