@@ -35,5 +35,9 @@ class BaseController extends LayoutController
       'fortifi.chat.domain',
       $this->getConfigItem('fortifi', 'chat')
     );
+    $this->layout()->setData(
+      'fortifi.chat.protocol',
+      $this->getConfigItem('fortifi', 'protocol')
+    );
   }
 }

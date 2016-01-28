@@ -131,17 +131,19 @@ $am->requireJs(
 <!-- End of Fortifi Chat config -->
 <!-- Start of Fortifi Chat code -->
 <script type="text/javascript">
-  (function (d, s, i, u)
+  (function (d, s, i, u, p)
   {
     if (d.getElementById(i))
     {return;}
     var n = d.createElement(s), e = d.getElementsByTagName(s)[0];
     n.id = i;
-    n.src = '//' + u + '/js/chatManager.js';
+    n.src = p + '://' + u + '/js/chatManager.js';
     e.parentNode.insertBefore(n, e);
   })(
     document, "script", "fortifi-chat",
-    "<?= $this->getData('fortifi.chat.domain'); ?>"
+    "<?= $this->getData('fortifi.chat.domain'); ?>","<?= $this->getData(
+      'fortifi.chat.protocol'
+    ); ?>"
   );
 </script>
 <!-- End of Fortifi Chat code -->
