@@ -1,0 +1,3 @@
+#!/bin/bash
+
+php cubex serve --port 8888
