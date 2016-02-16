@@ -3,6 +3,7 @@ namespace DemoCorp\Applications\Frontend\Controllers;
 
 use DemoCorp\Applications\Frontend\Views\AssetTemplatedView;
 use Fortifi\FortifiApi\Affiliate\Enums\AffiliateBuiltInAction;
+use Packaged\Helpers\Arrays;
 use Packaged\Helpers\Strings;
 
 class RefundController extends BaseController
@@ -10,9 +11,9 @@ class RefundController extends BaseController
   public function postDefaultAction()
   {
     $reqData = $this->_getRequest()->request->all();
-    $eventRef = idx($reqData, 'event_ref');
+    $eventRef = Arrays::value($reqData, 'event_ref');
 
-    switch(idx($reqData, 'type'))
+    switch(Arrays::value($reqData, 'type'))
     {
       case 'join':
         $type = AffiliateBuiltInAction::LEAD;
@@ -28,7 +29,7 @@ class RefundController extends BaseController
       $eventRef,
       $type,
       Strings::randomString(6),
-      idx($reqData, 'amount'),
+      Arrays::value($reqData, 'amount'),
       $reqData
     );
 

@@ -2,6 +2,7 @@
 namespace DemoCorp\Applications\Frontend\Controllers;
 
 use DemoCorp\Applications\Frontend\Views\AssetTemplatedView;
+use Packaged\Helpers\Arrays;
 use Packaged\Helpers\Strings;
 
 class PurchaseController extends BaseController
@@ -9,13 +10,13 @@ class PurchaseController extends BaseController
   public function postDefaultAction()
   {
     $reqData = $this->_getRequest()->request->all();
-    $eventRef = idx($reqData, 'event_ref', Strings::randomString(6));
+    $eventRef = Arrays::value($reqData, 'event_ref', Strings::randomString(6));
 
     //Trigger Fortifi Join
     $this->_getFortifi()->customer()->purchase(
       'FID:COMP:1429731764:3d9f2a4ed06c',
       $eventRef,
-      idx($reqData, 'amount'),
+      Arrays::value($reqData, 'amount'),
       $reqData
     );
 
@@ -24,7 +25,7 @@ class PurchaseController extends BaseController
     echo '<h4>Fortifi Pixels</h4>';
     foreach($this->_getFortifi()->visitor()->getPixels() as $pixel)
     {
-      echo '<textarea cols="100" rows="6">' . esc($pixel) . '</textarea><br/>';
+      echo '<textarea cols="100" rows="6">' . Strings::escape($pixel) . '</textarea><br/>';
     }
 
     echo '</div></div></div>';
