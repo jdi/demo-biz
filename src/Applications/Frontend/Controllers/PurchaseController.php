@@ -3,7 +3,7 @@ namespace DemoCorp\Applications\Frontend\Controllers;
 
 use DemoCorp\Applications\Frontend\Views\AssetTemplatedView;
 use Fortifi\FortifiApi\Affiliate\Enums\AffiliateBuiltInAction;
-use Fortifi\Sdk\Models\Visitor;
+use Packaged\Dispatch\AssetManager;
 use Packaged\Helpers\Arrays;
 use Packaged\Helpers\Strings;
 
@@ -20,20 +20,29 @@ class PurchaseController extends BaseController
       AffiliateBuiltInAction::ACQUISITION,
       $eventRef,
       Arrays::value($reqData, 'amount'),
-      $reqData
+      $reqData,
+      $reqData['coupon'],
+      false
     );
 
-    echo '<div class="row"><div class="box"><div class="col-lg-12">';
-
-    echo '<h4>Fortifi Pixels</h4>';
-    foreach($this->_getFortifi()->visitor()->getPixels() as $pixel)
-    {
-      echo '<textarea cols="100" rows="6">'
-        . Strings::escape($pixel)
-        . '</textarea><br/>';
-    }
-
-    echo '</div></div></div>';
+    // pixels are triggered by JS for purchase
+    // CSS to make the pixel box visible
+    AssetManager::assetType()->requireInlineCss(
+      '#fortifi-px-container { width:initial!important;height:initial!important;position:initial!important;top:initial!important;left:initial!important; }'
+    );
+    AssetManager::assetType()->requireInlineJs('(function (d, s, i, u)
+  {
+    if (d.getElementById(i))
+    {return;}
+    var n = d.createElement(s), e = d.getElementsByTagName(s)[0];
+    n.id = i;
+    n.src = \'//\' + u + \'/px/init/fortifi.js\';
+    e.parentNode.insertBefore(n, e);
+  })(
+    document, "script", "fortifi-pixel",
+    "'. $this->getConfigItem('fortifi','track') .'"
+  );
+');
   }
 
   public function defaultAction()
