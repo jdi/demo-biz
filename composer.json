@@ -4,7 +4,7 @@
   "license": "BSD-3-Clause",
   "require": {
     "cubex/framework": "~2",
-    "fortifi/sdk": "~1",
+    "fortifi/sdk": "~2",
     "packaged/dispatch": "~1",
     "stack/builder": "~1"
   },

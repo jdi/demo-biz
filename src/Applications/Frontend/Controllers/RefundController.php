@@ -3,6 +3,7 @@ namespace DemoCorp\Applications\Frontend\Controllers;
 
 use DemoCorp\Applications\Frontend\Views\AssetTemplatedView;
 use Fortifi\FortifiApi\Affiliate\Enums\AffiliateBuiltInAction;
+use Fortifi\FortifiApi\Affiliate\Enums\ReversalReason;
 use Packaged\Helpers\Arrays;
 use Packaged\Helpers\Strings;
 
@@ -25,9 +26,10 @@ class RefundController extends BaseController
     }
 
     //Trigger Fortifi Join
-    $this->_getFortifi()->customer()->cancel(
+    $this->_getFortifi()->visitor()->reverseAction(
       $eventRef,
       $type,
+      ReversalReason::CANCEL,
       Strings::randomString(6),
       Arrays::value($reqData, 'amount'),
       $reqData

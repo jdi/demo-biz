@@ -35,7 +35,8 @@ class JoinController extends BaseController
       foreach($pixels->items as $pixel)
       {
         echo '<textarea cols="100" rows="6">'
-          . Strings::escape($pixel) . '</textarea><br/>';
+          . Strings::escape($pixel)
+          . '</textarea><br/>';
       }
     }
 
