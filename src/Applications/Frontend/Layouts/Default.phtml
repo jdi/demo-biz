@@ -141,9 +141,8 @@ $am->requireJs(
     e.parentNode.insertBefore(n, e);
   })(
     document, "script", "fortifi-chat",
-    "<?= $this->getData('fortifi.chat.domain'); ?>","<?= $this->getData(
-      'fortifi.chat.protocol'
-    ); ?>"
+    "<?= $this->getData('fortifi.chat.domain'); ?>",
+    "<?= $this->getData('fortifi.chat.protocol'); ?>"
   );
 </script>
 <!-- End of Fortifi Chat code -->
