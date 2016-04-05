@@ -4,7 +4,7 @@
   "license": "BSD-3-Clause",
   "require": {
     "cubex/framework": "~2",
-    "fortifi/php-api": "dev-master",
+    "fortifi/php-api": "~1.0",
     "rmccue/requests": "~1.0",
     "packaged/dispatch": "~1",
     "stack/builder": "~1"
