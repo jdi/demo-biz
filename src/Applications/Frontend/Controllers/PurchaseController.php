@@ -2,28 +2,41 @@
 namespace DemoCorp\Applications\Frontend\Controllers;
 
 use DemoCorp\Applications\Frontend\Views\AssetTemplatedView;
-use Fortifi\FortifiApi\Affiliate\Enums\AffiliateBuiltInAction;
+use Fortifi\Api\V1\Helpers\VisitorHelper;
+use Fortifi\Api\V1\Payloads\PostActionPayload;
 use Packaged\Dispatch\AssetManager;
-use Packaged\Helpers\Arrays;
 use Packaged\Helpers\Strings;
 
 class PurchaseController extends BaseController
 {
   public function postDefaultAction()
   {
-    $reqData = $this->_getRequest()->request->all();
-    $eventRef = Arrays::value($reqData, 'event_ref', Strings::randomString(6));
+    $reqData = $this->_getRequest()->request;
+    $eventRef = $reqData->get('event_ref', Strings::randomString(6));
 
-    //Trigger Fortifi Join
-    $this->_getFortifi()->visitor()->triggerAction(
-      'FID:COMP:1429731764:3d9f2a4ed06c',
-      AffiliateBuiltInAction::ACQUISITION,
-      $eventRef,
-      Arrays::value($reqData, 'amount'),
-      $reqData,
-      $reqData['coupon'],
-      false
-    );
+    //Trigger Fortifi Purchase
+    $purchaseCreate = new PostActionPayload();
+    $purchaseCreate->setTime(gmdate(\DateTime::RFC3339));
+    $purchaseCreate->setCouponCode($reqData->get('coupon'));
+    $purchaseCreate->setTransactionId($eventRef);
+    $purchaseCreate->setTransactionValue($reqData->get('amount'));
+    $purchaseCreate->setMetaData($reqData->all());
+    $purchaseCreate->setCompanyFid($this->_companyFid);
+    $purchaseCreate->setClientIp(VisitorHelper::getClientIp());
+    $fortifiRequest = $this->_getFortifi()->visitors()
+      ->with(VisitorHelper::getCookieVisitorId())
+      ->actions()->with('acquisition')
+      ->create($purchaseCreate);
+
+    try
+    {
+      var_dump($fortifiRequest->wasSuccessful());
+      var_dump($fortifiRequest->getRawResult());
+    }
+    catch(\Exception $e)
+    {
+      var_dump($e);
+    }
 
     // pixels are triggered by JS for purchase and inserted into #fortifi-px-container
     $trackDomain = $this->getConfigItem('fortifi', 'track');

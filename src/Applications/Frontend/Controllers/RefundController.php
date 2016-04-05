@@ -2,42 +2,39 @@
 namespace DemoCorp\Applications\Frontend\Controllers;
 
 use DemoCorp\Applications\Frontend\Views\AssetTemplatedView;
-use Fortifi\FortifiApi\Affiliate\Enums\AffiliateBuiltInAction;
-use Fortifi\FortifiApi\Affiliate\Enums\ReversalReason;
-use Packaged\Helpers\Arrays;
+use Fortifi\Api\V1\Enums\ReversalReason;
+use Fortifi\Api\V1\Payloads\ReverseActionPayload;
 use Packaged\Helpers\Strings;
 
 class RefundController extends BaseController
 {
   public function postDefaultAction()
   {
-    $reqData = $this->_getRequest()->request->all();
-    $eventRef = Arrays::value($reqData, 'event_ref');
+    $reqData = $this->_getRequest()->request;
+    $eventRef = $reqData->get('event_ref');
 
-    switch(Arrays::value($reqData, 'type'))
+    switch($reqData->get('type'))
     {
       case 'join':
-        $type = AffiliateBuiltInAction::LEAD;
+        $type = 'lead';
         break;
       case 'sale':
       default:
-        $type = AffiliateBuiltInAction::ACQUISITION;
+        $type = 'acquisition';
         break;
     }
 
-    //Trigger Fortifi Join
-    $this->_getFortifi()->visitor()->reverseAction(
-      $eventRef,
-      $type,
-      ReversalReason::CANCEL,
-      Strings::randomString(6),
-      Arrays::value($reqData, 'amount'),
-      $reqData
-    );
+    //Trigger Fortifi Reversal
+    $reversalPayload = new ReverseActionPayload();
+    $reversalPayload->setReason(ReversalReason::CANCEL);
+    $reversalPayload->setExternalReference($eventRef);
+    $reversalPayload->setReversalId(Strings::randomString(6));
+    $reversalPayload->setReversalAmount($reqData->get('amount'));
+    $reversalPayload->setMetaData($reqData->all());
+    $this->_getFortifi()->visitors()->with('VISI')->actions()->with($type)
+      ->createReverse($reversalPayload)->wasSuccessful();
 
     echo '<div class="row"><div class="box"><div class="col-lg-12">';
-
-    //echo '<h3>' . ($resp ? 'Refund successful' : 'Refund failed') . '</h3>';
 
     echo '</div></div></div>';
   }
