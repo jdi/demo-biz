@@ -2,7 +2,6 @@
 namespace DemoCorp\Applications\Frontend\Controllers;
 
 use Cubex\View\LayoutController;
-use Fortifi\Api\Core\ApiDefinition\ApiDefinition;
 use Fortifi\Api\Core\Connections\RequestsConnection;
 use Fortifi\Api\Core\OAuth\Grants\ServiceAccountGrant;
 use Fortifi\Api\V1\APIs\StageFortifiApi;
@@ -26,12 +25,6 @@ class BaseController extends LayoutController
       $connection->setOrganisationFid($cfg->getItem('org'));
 
       $endpoint = new StageFortifiApi();
-      $def = $endpoint->getApiDefinition();
-      if($def instanceof ApiDefinition)
-      {
-        $def->setHost('api.fortel.li:9090');
-        $def->setSchemas(['http']);
-      }
       $endpoint->setConnection($connection);
 
       $endpoint->setAccessGrant(
