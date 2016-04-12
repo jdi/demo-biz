@@ -3,6 +3,7 @@ namespace DemoCorp\Applications\Frontend\Controllers;
 
 use DemoCorp\Applications\Frontend\Views\AssetTemplatedView;
 use Fortifi\Api\V1\Enums\ReversalReason;
+use Fortifi\Api\V1\Helpers\VisitorHelper;
 use Fortifi\Api\V1\Payloads\ReverseActionPayload;
 use Packaged\Helpers\Strings;
 
@@ -27,14 +28,24 @@ class RefundController extends BaseController
     //Trigger Fortifi Reversal
     $reversalPayload = new ReverseActionPayload();
     $reversalPayload->setReason(ReversalReason::CANCEL);
-    $reversalPayload->setExternalReference($eventRef);
+    $reversalPayload->setSourceTransactionId($eventRef);
     $reversalPayload->setReversalId(Strings::randomString(6));
     $reversalPayload->setReversalAmount($reqData->get('amount'));
     $reversalPayload->setMetaData($reqData->all());
-    $this->_getFortifi()->visitors()->with('VISI')->actions()->with($type)
-      ->createReverse($reversalPayload)->wasSuccessful();
+    $fortifiRequest = $this->_getFortifi()->visitors()
+      ->with(VisitorHelper::getCookieVisitorId())->actions()->with($type)
+      ->createReverse($reversalPayload);
 
     echo '<div class="row"><div class="box"><div class="col-lg-12">';
+    try
+    {
+      var_dump($fortifiRequest->wasSuccessful());
+      var_dump($fortifiRequest->getRawResult());
+    }
+    catch(\Exception $e)
+    {
+      var_dump($e);
+    }
 
     echo '</div></div></div>';
   }
