@@ -2,9 +2,9 @@
 namespace DemoCorp\Applications\Frontend\Controllers;
 
 use Cubex\View\LayoutController;
+use DemoCorp\Applications\LocalFortifiApi;
 use Fortifi\Api\Core\Connections\RequestsConnection;
 use Fortifi\Api\Core\OAuth\Grants\ServiceAccountGrant;
-use Fortifi\Api\V1\APIs\StageFortifiApi;
 use Fortifi\Api\V1\Endpoints\FortifiApi;
 
 class BaseController extends LayoutController
@@ -24,7 +24,7 @@ class BaseController extends LayoutController
       $connection = new RequestsConnection();
       $connection->setOrganisationFid($cfg->getItem('org'));
 
-      $endpoint = new StageFortifiApi();
+      $endpoint = new LocalFortifiApi();
       $endpoint->setConnection($connection);
 
       $endpoint->setAccessGrant(
