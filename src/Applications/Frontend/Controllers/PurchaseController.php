@@ -16,13 +16,14 @@ class PurchaseController extends BaseController
 
     //Trigger Fortifi Purchase
     $purchaseCreate = new PostActionPayload();
-    $purchaseCreate->setTime(gmdate(\DateTime::RFC3339));
+    $purchaseCreate->setTime(gmdate(\DateTime::ISO8601));
     $purchaseCreate->setCouponCode($reqData->get('coupon'));
     $purchaseCreate->setTransactionId($eventRef);
     $purchaseCreate->setTransactionValue($reqData->get('amount'));
     $purchaseCreate->setMetaData($reqData->all());
     $purchaseCreate->setCompanyFid($this->_companyFid);
     $purchaseCreate->setClientIp(VisitorHelper::getClientIp());
+    $purchaseCreate->setReturnPixels(false);
     $fortifiRequest = $this->_getFortifi()->visitors()
       ->with(VisitorHelper::getCookieVisitorId())
       ->actions()->with('acquisition')
