@@ -21,7 +21,7 @@ class PurchaseController extends BaseController
     $purchaseCreate->setTransactionId($eventRef);
     $purchaseCreate->setTransactionValue($reqData->get('amount'));
     $purchaseCreate->setMetaData($reqData->all());
-    $purchaseCreate->setCompanyFid($this->_companyFid);
+    $purchaseCreate->setBrandFid($this->_companyFid);
     $purchaseCreate->setClientIp(VisitorHelper::getClientIp());
     $purchaseCreate->setReturnPixels(false);
     $fortifiRequest = $this->_getFortifi()->visitors()

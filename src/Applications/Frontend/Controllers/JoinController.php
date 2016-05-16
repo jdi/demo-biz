@@ -26,7 +26,7 @@ class JoinController extends BaseController
     $joinCreate->setTransactionId($eventRef);
     $joinCreate->setTransactionValue($reqData->get('amount'));
     $joinCreate->setMetaData($reqData->all());
-    $joinCreate->setCompanyFid($this->_companyFid);
+    $joinCreate->setBrandFid($this->_companyFid);
     $joinCreate->setClientIp(VisitorHelper::getClientIp());
     $fortifiRequest = $this->_getFortifi()->visitors()
       ->with(VisitorHelper::getCookieVisitorId())
