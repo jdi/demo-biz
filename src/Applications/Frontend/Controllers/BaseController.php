@@ -30,12 +30,8 @@ class BaseController extends LayoutController
         case 'local':
           $endpoint = new LocalFortifiApi();
           break;
-        case 'stage':
-          $endpoint = new StageFortifiApi();
-          break;
-        case 'production':
         default:
-          $endpoint = new FortifiApi();
+          $endpoint = new StageFortifiApi();
       }
 
       $endpoint->setConnection($connection);
