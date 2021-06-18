@@ -9,7 +9,7 @@ use Packaged\Helpers\Strings;
 
 class RefundController extends BaseController
 {
-  public function postDefaultAction()
+  public function postRefund()
   {
     $reqData = $this->_getRequest()->request;
     $eventRef = $reqData->get('event_ref');
@@ -50,7 +50,7 @@ class RefundController extends BaseController
     echo '</div></div></div>';
   }
 
-  public function defaultAction()
+  public function getRefund()
   {
     return new AssetTemplatedView($this, 'Refund');
   }

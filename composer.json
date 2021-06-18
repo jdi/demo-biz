@@ -1,17 +1,17 @@
 {
-  "name": "jdi/demo-corp",
-  "homepage": "http://demo-corp.biz",
-  "license": "BSD-3-Clause",
-  "require": {
-    "cubex/framework": "~2",
-    "fortifi/php-api": "~1.0",
-    "rmccue/requests": "~1.0",
-    "packaged/dispatch": "~1",
-    "stack/builder": "~1"
-  },
-  "autoload": {
-    "psr-4": {
-      "DemoCorp\\": "src/"
+    "name": "jdi/demo-corp",
+    "homepage": "http://demo-corp.biz",
+    "license": "BSD-3-Clause",
+    "require": {
+        "cubex/framework": "2.4.10",
+        "fortifi/php-api": "1.5.2",
+        "rmccue/requests": "1.6.0",
+        "packaged/dispatch": "1.5.0",
+        "stack/builder": "1.0.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "DemoCorp\\": "src/"
+        }
     }
-  }
 }

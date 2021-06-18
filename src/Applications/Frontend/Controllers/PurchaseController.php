@@ -9,7 +9,7 @@ use Packaged\Helpers\Strings;
 
 class PurchaseController extends BaseController
 {
-  public function postDefaultAction()
+  public function postPurchase()
   {
     $reqData = $this->_getRequest()->request;
     $eventRef = $reqData->get('event_ref', Strings::randomString(6));
@@ -58,7 +58,7 @@ FIN
     echo '</div></div></div>';
   }
 
-  public function defaultAction()
+  public function getPurchase()
   {
     return new AssetTemplatedView($this, 'Purchase');
   }
