@@ -5,7 +5,7 @@
     "require": {
         "cubex/framework": "2.4.10",
         "fortifi/php-api": "1.5.2",
-        "rmccue/requests": "1.6.0",
+        "rmccue/requests": "1.8.0",
         "packaged/dispatch": "1.5.0",
         "stack/builder": "1.0.4"
     },
