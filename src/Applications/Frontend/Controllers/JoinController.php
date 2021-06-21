@@ -9,12 +9,12 @@ use Packaged\Helpers\Strings;
 
 class JoinController extends BaseController
 {
-  public function defaultAction()
+  public function getJoin()
   {
     return new AssetTemplatedView($this, 'Join');
   }
 
-  public function postDefaultAction()
+  public function postJoin()
   {
     $reqData = $this->_getRequest()->request;
     $eventRef = $reqData->get('event_ref', Strings::randomString(6));
